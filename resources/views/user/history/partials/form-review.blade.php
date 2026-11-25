@@ -8,8 +8,7 @@
         <form action="{{ route('user.history.review.store') }}" method="POST">
             @csrf
             <input type="hidden" name="booking_id" value="{{ $booking->id }}">
-            <input type="hidden" name="room_id" value="{{ $booking->room_id }}">
-
+            
             <div class="mb-4">
                 <label class="form-label fw-bold">Seberapa puas Anda?</label>
                 <select name="rating" class="form-select" required>
