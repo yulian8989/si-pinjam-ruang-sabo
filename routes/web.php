@@ -41,7 +41,7 @@ Route::middleware(['auth', 'role:admin', 'is_active'])->prefix('admin')->name('a
     Route::get('/bookings/report/download', [AdminBookingController::class, 'downloadReport'])->name('bookings.report');
 
     // 2. Fitur Verifikasi Berkas & Booking
-    Route::resource('bookings', AdminBookingController::class);
+    Route::resource('bookings', AdminBookingController::class)->only(['index', 'edit', 'update']);
     Route::post('bookings/{booking}/approve', [AdminBookingController::class, 'approve'])->name('bookings.approve');
     Route::post('bookings/{booking}/reject', [AdminBookingController::class, 'reject'])->name('bookings.reject');
 
@@ -68,8 +68,9 @@ Route::middleware(['auth', 'role:staff', 'is_active'])->prefix('staff')->name('s
     
     Route::get('/dashboard', [StaffDashboardController::class, 'index'])->name('dashboard');
     
-    Route::resource('rooms', RoomController::class);
-    Route::resource('facilities', FacilityController::class);
+    Route::resource('rooms', RoomController::class)->except(['show']);
+    Route::resource('facilities', FacilityController::class)->except(['show']);
+
 
     Route::get('/bookings', [StaffBookingController::class, 'index'])->name('bookings.index');
     Route::post('/bookings/{id}/approve', [StaffBookingController::class, 'approve'])->name('bookings.approve');
