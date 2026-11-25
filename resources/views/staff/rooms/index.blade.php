@@ -35,8 +35,9 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>
-                                @if($room->image)
-                                    <img src="{{ asset('storage/' . $room->image) }}" class="img-thumbnail" style="width: 80px;">
+                              @php $thumbnail = $room->images[0] ?? null; @endphp
+                                @if($thumbnail)
+                                <img src="{{ asset('storage/' . $thumbnail) }}" class="img-thumbnail" style="width: 80px;">
                                 @else
                                     <span class="text-muted">Tidak ada Gambar</span>
                                 @endif
